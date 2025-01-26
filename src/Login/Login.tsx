@@ -40,7 +40,7 @@ export default function Login() {
           <Button
             variant="contained"
             fullWidth
-            sx={{ backgroundColor: "#FC4747" }}
+            sx={{ backgroundColor: "#FC4747", color: "#ffffffb3" }}
           >
             Text
           </Button>
