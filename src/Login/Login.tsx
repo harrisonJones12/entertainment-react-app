@@ -1,4 +1,5 @@
 import { TextField, Button } from "@mui/material";
+import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./Login.css";
 
@@ -13,6 +14,7 @@ const theme = createTheme({
 });
 
 export default function Login() {
+  const [isLoginPage, setisLoginPage] = useState(false);
   return (
     <div className="login">
       {/* login icon  */}
@@ -29,7 +31,7 @@ export default function Login() {
       </svg>
       <div className="credentials-text-input-container">
         <div className="text-input-button-container">
-          <h2 className="login-heading">Login</h2>
+          <h2 className="login-heading">{isLoginPage ? "Login" : "Sign Up"}</h2>
           <ThemeProvider theme={theme}>
             <TextField
               id="standard-basic"
@@ -39,7 +41,6 @@ export default function Login() {
               color="primary"
               aria-label="email input"
             />
-
             <TextField
               id="standard-basic"
               label="Password"
@@ -48,6 +49,16 @@ export default function Login() {
               color="primary"
               aria-label="password input"
             />
+            {!isLoginPage && (
+              <TextField
+                id="standard-basic"
+                label="Repeat password"
+                variant="standard"
+                sx={{ color: "white" }}
+                color="primary"
+                aria-label="repeat password input"
+              />
+            )}
           </ThemeProvider>
           <Button
             variant="contained"
@@ -57,9 +68,22 @@ export default function Login() {
             Text
           </Button>
           <span className="sign-up-action-text">
-            Don't have an account?{" "}
-            <Button color="primary" variant="text" sx={{ color: "#FC4747 " }}>
-              Sign Up
+            {isLoginPage
+              ? `Don't have an account?`
+              : "Already have an account?"}
+            <Button
+              color="primary"
+              variant="text"
+              sx={{ color: "#FC4747 " }}
+              onClick={() => {
+                if (isLoginPage === false) {
+                  setisLoginPage(true);
+                } else {
+                  setisLoginPage(false);
+                }
+              }}
+            >
+              {isLoginPage ? "Login" : "Sign Up"}
             </Button>
           </span>
         </div>
